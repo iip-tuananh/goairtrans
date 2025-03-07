@@ -19151,7 +19151,7 @@ hr.style1 {
     line-height: 56px;
     border-radius: 50%;
     background-color: var(--title-color);
-    color: var(--theme-color);
+    color: #fff;
     display: block;
     margin: auto auto -40px
 }
