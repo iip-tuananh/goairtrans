@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        view()->composer('*', function ($view) 
+        view()->composer('*', function ($view)
         {
             if(Auth::guard('customer')->user() != null){
                 $profile = Auth::guard('customer')->user();
@@ -47,7 +47,7 @@ class AppServiceProvider extends ServiceProvider
             }
             $language_current = Session::get('locale');
             $promotio = Promotion::where('status',1)->orderBy('id','DESC')->get();
-            $servicehome = Services::where('status',1)->orderBy('id','DESC')->get();
+            $servicehome = Services::where('status',1)->orderBy('id','ASC')->get();
             $servicecate = ServiceCate::where('status',1)->orderBy('id','DESC')->get();
             $giaiphap = Solution::where('status',1)->orderBy('id','DESC')->get();
             $setting = Setting::first();
@@ -55,7 +55,7 @@ class AppServiceProvider extends ServiceProvider
             $pageContent = PageContent::where(['language'=>$language_current,'status'=> 1])->get();
             $categoryhome = Category::with([
                 'typeCate' => function ($query) {
-                    $query->with(['typetwo'])->where('status',1)->orderBy('id','DESC')->select('cate_id','id', 'name','avatar','slug','cate_slug'); 
+                    $query->with(['typetwo'])->where('status',1)->orderBy('id','DESC')->select('cate_id','id', 'name','avatar','slug','cate_slug');
                 }
             ])->where('status',1)->orderBy('id','DESC')->get(['id','name','imagehome','avatar','slug','content'])->map(function ($query) {
                 $query->setRelation('product', $query->product->take(6));
@@ -88,7 +88,7 @@ class AppServiceProvider extends ServiceProvider
                 'servicehome'=>$servicehome,
                 'giaiphap'=>$giaiphap,
                 'servicecate'=>$servicecate
-                ]);    
-        });  
+                ]);
+        });
     }
 }
