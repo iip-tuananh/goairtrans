@@ -94,7 +94,11 @@ export default {
           route_name: "",
           sub: [
             {
-              name: "Danh sách",
+              name: "Danh mục dịch vụ",
+              path: "/service/category",
+            },
+            {
+              name: "Danh sách dịch vụ",
               path: "/service",
             },
           ],

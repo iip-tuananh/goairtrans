@@ -4,7 +4,7 @@
       <div class="col-md-8 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            
+
             <div class="form-group">
               <label>Tên dịch vụ</label>
               <vs-input
@@ -65,6 +65,25 @@
       <div class="col-md-4 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
+            <div class="form-group">
+                <label>Danh mục dịch vụ</label>
+                <vs-select
+                    class="selectExample"
+                    v-model="objData.cate_id"
+                    placeholder="Danh mục"
+                >
+                <vs-select-item
+                    value="0"
+                    text="Không danh mục"
+                    />
+                    <vs-select-item
+                    :value="item.id"
+                    :text="item.name"
+                    v-for="(item, index) in cate"
+                    :key="'f' + index"
+                    />
+                </vs-select>
+            </div>
             <div class="form-group">
               <label>Trạng thái</label>
               <vs-select v-model="objData.status">
@@ -129,7 +148,7 @@ export default {
   computed: {},
   watch: {},
   methods: {
-    ...mapActions([ 
+    ...mapActions([
       "addService",
       "loadings",
       "listLanguage",

@@ -47,8 +47,8 @@ class AppServiceProvider extends ServiceProvider
             }
             $language_current = Session::get('locale');
             $promotio = Promotion::where('status',1)->orderBy('id','DESC')->get();
-            $servicehome = Services::where('status',1)->orderBy('id','ASC')->get();
-            $servicecate = ServiceCate::where('status',1)->orderBy('id','DESC')->get();
+            $servicehome = Services::with('cate')->where('status',1)->orderBy('id','ASC')->get();
+            $servicecate = ServiceCate::with('services')->where('status',1)->orderBy('id','ASC')->get();
             $giaiphap = Solution::where('status',1)->orderBy('id','DESC')->get();
             $setting = Setting::first();
             $lang = Language::get();

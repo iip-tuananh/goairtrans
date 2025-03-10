@@ -105,9 +105,16 @@
                                 <li class="menu-item-has-children">
                                     <a href="">Dịch vụ</a>
                                     <ul class="sub-menu">
-                                        @foreach ($servicehome as $item)
-                                            <li><a
-                                                    href="{{ route('serviceDetail', ['slug' => $item->slug]) }}">{{ $item->name }}</a>
+                                        @foreach ($servicecate as $cate)
+                                            <li>
+                                                <a href="{{ route('serviceCateList', ['slug' => $cate->slug]) }}">{{ $cate->name }}</a>
+                                                @if ($cate->services->count() > 0)
+                                                    <ul class="sub-menu">
+                                                        @foreach ($cate->services as $item)
+                                                        <li><a href="{{ route('serviceDetail', ['slug' => $item->slug]) }}">{{ $item->name }}</a></li>
+                                                        @endforeach
+                                                    </ul>
+                                                @endif
                                             </li>
                                         @endforeach
                                     </ul>

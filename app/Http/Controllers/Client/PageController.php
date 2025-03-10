@@ -199,8 +199,8 @@ class PageController extends Controller
     }
     public function serviceCateList($slug)
     {
-        $data['list'] = Services::where(['cate_slug'=>$slug])->paginate(9);
-        $data['cate_content'] = ServiceCate::where('slug',$slug)->first();
+        $data['listService'] = Services::where(['cate_slug'=>$slug])->paginate(20);
+        $data['category'] = ServiceCate::where('slug',$slug)->first();
         return view('servicelist',$data);
     }
     public function serviceDetail($slug)

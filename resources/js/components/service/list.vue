@@ -13,6 +13,7 @@
                 <template slot="thead">
                   <vs-th>Ảnh</vs-th>
                   <vs-th>Tên</vs-th>
+                  <vs-th>Danh mục</vs-th>
                   <vs-th>Hành động</vs-th>
                 </template>
                 <template slot-scope="{data}">
@@ -21,6 +22,7 @@
                       <vs-avatar size="70px" :src="tr.image" />
                     </vs-td>
                     <vs-td :data="tr.name">{{tr.name}}</vs-td>
+                    <vs-td :data="tr.cate_id">{{tr.cate.name}}</vs-td>
                     <vs-td >
                       <router-link :to="{name:'editService',params:{id:tr.id}}">
                         <vs-button

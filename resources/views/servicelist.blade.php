@@ -9,74 +9,87 @@ Dịch vụ của {{$setting->company}}
 {{url(''.$banner[0]->image)}}
 @endsection
 @section('css')
+<style>
+    .dc_swiper_thumb {
+        position: relative;
+        z-index: 1;
+    }
+    .dc_swiper_thumb:before {
+        content: '';
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        background: url(/frontend/img/tuyen_duong_noi_bat_overlay.png) left bottom repeat-x;
+    }
+    .dc_swiper_thumb img {
+        width: 100%;
+    }
+
+    .tuyen_duong_item {
+        position: relative;
+        z-index: 1;
+    }
+    .tuyen_duong_item ul {
+        position: absolute;
+        width: 100%;
+        left: 0;
+        bottom: 10px;
+        margin: 0;
+        padding: 0 10px;
+        z-index: 9;
+    }
+
+    .tuyen_duong_item ul li {
+        list-style: none;
+        display: block;
+        width: calc(100%);
+        float: left;
+        color: #FFF;
+    }
+</style>
 @endsection
 @section('js')
 @endsection
 @section('content')
-<div class="content-block ">
-    <div class="container-bg with-bgcolor" data-style="background-image: url({{url('frontend/images/photodune-5004243-luxury-home-m.jpg')}});background-color: #F4F4F4">
-       <div class="container-bg-overlay">
-          <div class="container">
-             <div class="row">
-                <div class="col-md-12">
-                   <div class="page-item-title">
-                      <h1 style="color: white">Dịch vụ của chúng tôi</h1>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
-       <div class="breadcrumbs-container-wrapper">
-          <div class="container">
-             <div class="row">
-                <div class="col-md-12">
-                   <div class="breadcrumbs" typeof="BreadcrumbList" vocab="http://schema.org/">
-                      <!-- Breadcrumb NavXT 6.2.1 -->
-                      <span property="itemListElement" typeof="ListItem">
-                         <a property="item" typeof="WebPage" title="Go to TheBuilt." href="{{route('home')}}" class="home"><span property="name">Home</span></a>
-                         <meta property="position" content="1">
-                      </span>
-                      &gt; 
-                      <span property="itemListElement" typeof="ListItem">
-                         <span property="name">Dịch vụ của chúng tôi</span>
-                         <meta property="position" content="2">
-                      </span>
-                   </div>
-                </div>
-             </div>
-          </div>
-       </div>
+    <div class="breadcumb-wrapper background-image" data-overlay="title" data-opacity="4"
+        style="background-image: url(&quot;{{ url('frontend/img/breadcumb-bg.jpg') }}&quot;);">
+        <div class="container z-index-common">
+            <h1 class="breadcumb-title">{{ $category->name }}</h1>
+            <ul class="breadcumb-menu">
+                <li><a href="{{ route('home') }}">Trang chủ</a></li>
+                <li>{{ $category->name }}</li>
+            </ul>
+        </div>
     </div>
-    <div class="page-container container">
-       <div class="row">
-          <div class="col-md-12 entry-content">
-             <article>
-                <div class="vc_row wpb_row vc_row-fluid vc_custom_1464186137917">
-                    @foreach ($list as $key => $item)
-                   <div class="wpb_column vc_column_container vc_col-sm-6">
-                      <div class="vc_column-inner">
-                         <div class="wpb_wrapper">
-                            <style scoped='scoped'>.mgt-promo-block-47315338164.mgt-promo-block.darken .mgt-promo-block-content {background-color: rgba(10,10,10,0.3)!important;}.mgt-promo-block-47315338164.mgt-promo-block.animated:hover .mgt-promo-block-content {background-color: rgba(42,47,53,0.5)!important;}</style>
-                            <div class="mgt-promo-block animated white-text cover-image text-size-normal darken mgt-promo-block-47315338164 wpb_content_element" data-style="background-image: url({{$item->image}});background-repeat: no-repeat;width: 100%; height: 220px;">
-                               <div class="mgt-promo-block-content va-bottom">
-                                  <div class="mgt-promo-block-content-inside vc_custom_1464196727384">
-                                     <i class="fa fa-2 fa-building">
-                                        <!-- Icon -->
-                                     </i>
-                                     <h3 style="font-size: 25px">{{$item->name}}
-                                     </h3>
-                                     <div class="mgt-button-wrapper mgt-button-wrapper-align-left mgt-button-wrapper-display-newline mgt-button-top-margin-disable"><a class="btn hvr-icon-wobble-horizontal mgt-button mgt-style-textwhite mgt-size-normal mgt-align-left mgt-display-newline mgt-text-size-small mgt-button-icon-position-right mgt-text-transform-uppercase " href="{{route('serviceDetail',['slug'=>$item->slug])}}">Chi tiết<i class="fa fa-arrow-right"></i></a></div>
-                                  </div>
-                               </div>
-                            </div>
-                         </div>
-                      </div>
-                   </div>
-                   @endforeach
+    <section class="space-top space-extra-bottom">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="row gy-30 justify-content-center">
+                        @foreach ($listService as $service)
+                        <div class="col-md-3 col-lg-3 col-12">
+                            <a class="tuyen_duong_item" href="{{ route('serviceDetail',['slug'=>$service->slug]) }}" title="{{ $service->name }}">
+                                <div class="dc_swiper_thumb">
+                                    <img alt="{{ $service->name }}" src="{{ url($service->image) }}" data-lazy-src="{{ url($service->image) }}" class="lazyloaded" data-was-processed="true">
+                                    <noscript><img alt="{{ $service->name }}" src="{{ url($service->image) }}"></noscript>
+                                </div>
+                                <ul>
+                                    <li><span style="color: #ffffff; font-size: 14px">{{ $service->name }}</span></li>
+                                    {{-- <li><span style="color: #ff9000; font-size: 12px;"><del>900K</del></span> - <span style="color: #fff000; font-size: 14px;">750K</span></li> --}}
+                                </ul>
+                            </a>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
-             </article>
-          </div>
-       </div>
-    </div>
- </div>
+                <div class="col-lg-12">
+                    <div class="pagination-wrapper">
+                        {{$listService->links()}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 @endsection
