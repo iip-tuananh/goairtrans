@@ -32,6 +32,7 @@ class Services extends Model
                 $query->image = $request->image;
                 $query->cate_id = $request->cate_id;
                 $query->cate_slug = $cate->slug;
+                $query->price = $request->price;
                 $query->save();
             }else{
                 $query = new Services();
@@ -43,6 +44,7 @@ class Services extends Model
                 $query->image = $request->image;
                 $query->cate_id = $request->cate_id;
                 $query->cate_slug = $cate->slug;
+                $query->price = $request->price;
                 $query->save();
             }
 
@@ -56,6 +58,7 @@ class Services extends Model
                 $query->image = $request->image;
                 $query->cate_id = $request->cate_id;
                 $query->cate_slug = $cate->slug;
+                $query->price = $request->price;
                 $query->save();
 
         }

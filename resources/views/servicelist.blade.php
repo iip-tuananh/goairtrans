@@ -32,6 +32,8 @@ Dịch vụ của {{$setting->company}}
         z-index: 1;
     }
     .tuyen_duong_item ul {
+        display: flex;
+        flex-wrap: wrap;
         position: absolute;
         width: 100%;
         left: 0;
@@ -47,6 +49,9 @@ Dịch vụ của {{$setting->company}}
         width: calc(100%);
         float: left;
         color: #FFF;
+    }
+    .tuyen_duong_item ul li:first-child {
+        width: 50%;
     }
 </style>
 @endsection
@@ -69,15 +74,20 @@ Dịch vụ của {{$setting->company}}
                 <div class="col-lg-12">
                     <div class="row gy-30 justify-content-center">
                         @foreach ($listService as $service)
-                        <div class="col-md-3 col-lg-3 col-12">
+                        <div class="col-md-4 col-lg-4 col-12">
                             <a class="tuyen_duong_item" href="{{ route('serviceDetail',['slug'=>$service->slug]) }}" title="{{ $service->name }}">
                                 <div class="dc_swiper_thumb">
                                     <img alt="{{ $service->name }}" src="{{ url($service->image) }}" data-lazy-src="{{ url($service->image) }}" class="lazyloaded" data-was-processed="true">
                                     <noscript><img alt="{{ $service->name }}" src="{{ url($service->image) }}"></noscript>
                                 </div>
                                 <ul>
-                                    <li><span style="color: #ffffff; font-size: 14px">{{ $service->name }}</span></li>
-                                    {{-- <li><span style="color: #ff9000; font-size: 12px;"><del>900K</del></span> - <span style="color: #fff000; font-size: 14px;">750K</span></li> --}}
+                                    <li><span style="color: #ffffff; font-size: 16px">{{ $service->name }}</span></li>
+                                    @if (isset($service->price) && $service->price > 0)
+                                    <li style="width: 50%"><span style="color: #fff000; font-size: 16px; float:right;">{{number_format($service->price)}}đ</span></li>
+                                    <li style="font-size: 13px;">
+                                        Giá 1 chiều chưa bao gồm phí cao tốc
+                                    </li>
+                                    @endif
                                 </ul>
                             </a>
                         </div>

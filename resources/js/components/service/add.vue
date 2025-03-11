@@ -68,7 +68,7 @@
             <div class="form-group">
                 <label>Danh mục dịch vụ</label>
                 <vs-select
-                    class="selectExample"
+                    class="selectExample w-100"
                     v-model="objData.cate_id"
                     placeholder="Danh mục"
                 >
@@ -85,8 +85,12 @@
                 </vs-select>
             </div>
             <div class="form-group">
+                <label>Giá dịch vụ</label>
+                <vs-input v-model="objData.price" type="number" size="default" class="w-100"/>
+            </div>
+            <div class="form-group">
               <label>Trạng thái</label>
-              <vs-select v-model="objData.status">
+              <vs-select v-model="objData.status" class="w-100">
                 <vs-select-item value="1" text="Hiện" />
                 <vs-select-item value="0" text="Ẩn" />
               </vs-select>
@@ -138,7 +142,8 @@ export default {
         ],
         status: 1,
         image: "",
-        cate_id: 0
+        cate_id: 0,
+        price: 0
       },
     };
   },
@@ -209,11 +214,11 @@ export default {
           .then((response) => {
             this.loadings(false);
             this.$router.push({ name: "listService" });
-            this.$success("Thêm banner thành công");
+            this.$success("Thêm dịch vụ thành công");
           })
           .catch((error) => {
             this.loadings(false);
-            this.$error("Thêm banner thất bại");
+            this.$error("Thêm dịch vụ thất bại");
           });
       }
     }

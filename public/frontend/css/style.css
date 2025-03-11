@@ -17064,15 +17064,15 @@ table.variations .reset_variations {
 
 @media (max-width: 1299px) {
     .booking-form4 {
-        padding:50px 50px 50px 80px;
-        min-width: 500px;
-        margin-left: 0
+        padding: 16px 12px;
+        /* min-width: 500px; */
+        margin-left: 0;
     }
 }
 
 @media (max-width: 1199px) {
     .booking-form4 {
-        padding:50px 50px 50px 120px;
+        padding: 20px 16px;
         margin-top: 0
     }
 
@@ -19312,6 +19312,22 @@ form#submitFormDisanbay input::placeholder, form#submitFormDiduongdai input::pla
     }
     form#submitFormDisanbay #rotate_btn, form#submitFormDiduongdai #rotate_btn {
         top: 36px;
+    }
+}
+@media (max-width: 1299px) {
+    form#submitFormDisanbay .input-group label, form#submitFormDiduongdai .input-group label {
+        font-size: 11px !important;
+    }
+    form#submitFormDisanbay input[type=checkbox]~label, form#submitFormDiduongdai input[type=checkbox]~label {
+        font-size: 11px !important;
+    }
+    form#submitFormDisanbay .form-group input, form#submitFormDisanbay .form-group select,
+    form#submitFormDiduongdai .form-group input, form#submitFormDiduongdai .form-group select {
+        font-size: 11px !important;
+        padding: 10px !important;
+    }
+    .form#submitFormDiduongdai .th-btn, form#submitFormDisanbay .th-btn {
+        font-size: 10px !important;
     }
 }
 .error-message {

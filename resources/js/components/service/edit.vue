@@ -82,7 +82,7 @@
             <div class="form-group">
                 <label>Danh mục dịch vụ</label>
                 <vs-select
-                    class="selectExample"
+                    class="selectExample w-100"
                     v-model="objData.cate_id"
                     placeholder="Danh mục"
                 >
@@ -99,8 +99,12 @@
                 </vs-select>
             </div>
             <div class="form-group">
+                <label>Giá dịch vụ</label>
+                <vs-input v-model="objData.price" type="number" size="default" class="w-100"/>
+            </div>
+            <div class="form-group">
               <label>Trạng thái</label>
-              <vs-select v-model="objData.status">
+              <vs-select v-model="objData.status" class="w-100">
                 <vs-select-item value="1" text="Hiện" />
                 <vs-select-item value="0" text="Ẩn" />
               </vs-select>
@@ -155,6 +159,7 @@ export default {
         status: 1,
         image: "",
         cate_id: 0,
+        price: 0,
       },
       lang: [],
     };
@@ -187,15 +192,16 @@ export default {
         return;
       } else {
         this.loadings(true);
+        this.objData.price = this.formatPrice(this.objData.price, true);
         this.addService(this.objData)
           .then((response) => {
             this.loadings(false);
             this.$router.push({ name: "listService" });
-            this.$success("Thêm tin tức thành công");
+            this.$success("Thêm dịch vụ thành công");
           })
           .catch((error) => {
             this.loadings(false);
-            this.$error("Thêm tin tức thất bại");
+            this.$error("Thêm dịch vụ thất bại");
           });
       }
     },
@@ -271,16 +277,19 @@ export default {
               ],
               status: "",
               image: "",
+              cate_id: 0,
+              price: 0
             };
           } else {
             this.objData = response.data;
             this.objData.content = JSON.parse(response.data.content);
             this.objData.description = JSON.parse(response.data.description);
-            this.objData.name = JSON.parse(response.data.name);
+            // this.objData.name = JSON.parse(response.data.name);
+            this.objData.price = this.formatPrice(this.objData.price)
           }
         })
         .catch((error) => {
-          console.log(12);
+          console.log(error);
         });
     },
     listLang() {
@@ -293,6 +302,10 @@ export default {
     changeLanguage(data) {
       this.editById();
     },
+
+    formatPrice(value, toNumber = false) {
+        return toNumber ? parseFloat(value.replace(/,/g, '')) : Number(value).toLocaleString();
+    }
   },
   mounted() {
     this.listCateService().then((response) => {
