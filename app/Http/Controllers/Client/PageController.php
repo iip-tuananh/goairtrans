@@ -199,7 +199,7 @@ class PageController extends Controller
     }
     public function serviceCateList($slug)
     {
-        $data['listService'] = Services::where(['cate_slug'=>$slug])->paginate(20);
+        $data['listService'] = Services::where(['cate_slug'=>$slug])->paginate(15);
         $data['category'] = ServiceCate::where('slug',$slug)->first();
         return view('servicelist',$data);
     }
